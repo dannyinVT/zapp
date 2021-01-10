@@ -1,9 +1,11 @@
 # zapp
-A GUI wrapped for SClib using PyQT5
+A GUI wrapped for SClib using PyQT5, Pyhon3.7
 
 
 CD into project directly and launch main.py using
-python main.py or python3 main.py
+python main.py
+or
+python3 main.py
 
 
 Known Issues:
