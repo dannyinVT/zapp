@@ -34,22 +34,41 @@ class Window(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Zapp - simplistic SoundCloud downloader")
-        self.setGeometry(700, 500, 500, 400)
+        self.setGeometry(800, 500, 500, 300)
         self.MainUi()
         self.show()
 
     # Window objects
     def MainUi(self):
-        line_edit = QLineEdit("Enter URL", self)
-        line_edit.setGeometry(100, 100, 250, 40)
+
+        # Label for describing purpose of program
+        info_label = QLabel("SoundCloud downloader front end developed by Danny Davis using sclib, cheers.", self)
+        info_label.setGeometry(50, 0, 400, 100)
+
+
+        # Input URL into text edit box
+        line_edit = QLineEdit("Enter URL & hit return", self)
+        line_edit.setGeometry(140, 100, 250, 35)
         line_edit.returnPressed.connect(lambda: start_download())
+
+        # Download progress bar
+        # downloadprogress = QProgressBar(self)
+        # downloadprogress.setGeometry(140, 150, 250, 20)
+
+        # Start button for initiating download
         button = QPushButton("Start Download", self)
-        button.setGeometry(160, 200, 120, 50)
+        button.setGeometry(200, 200, 120, 40)
         button.clicked.connect(lambda: start_download())
 
         # from SClib, by Ian Murphy
         def start_download():
             api = SoundcloudAPI()  # never pass a Soundcloud client ID that did not come from this library
+
+            # in related to progress bar values
+            self.completed = 0
+            while self.completed < 100:
+                self.complted += 0.0002
+                self.progress.setVal(self.completed)
 
             url = line_edit.text()
             track = api.resolve(str(url))
